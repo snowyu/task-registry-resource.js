@@ -1,7 +1,7 @@
 {
   "name": "task-registry-resource",
   "description": "Resource Task is an abstract [resource][resource-file] processing task.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/snowyu/task-registry-resource.js",
   "repository": {
     "type": "git",
