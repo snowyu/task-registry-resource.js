@@ -14,14 +14,18 @@ the passed `aOptions` is a [resource][resource-file] file object.
 ## Usage
 
 ```coffee
-Resource  = require 'task-registry-resource'
-MyTask    = require 'task-registry-my'
+ResourceTask  = require 'task-registry-resource'
+Task          = require 'task-registry'
+register      = Task.register
+aliases       = Task.aliases
 
-echoSyncFn = (v)->v
-register echoSyncFn, MyTask, 'echo' #register the echoSyncFn to MyTask.
+class TestResourceTask
+  register TestResourceTask, ResourceTask
+  aliases TestResourceTask, 'Test', 'test'
 
-echoFn = (v, cb)->cb(null, v)
-register echoFn, MyTask, name:'echo', async:true #register the echoFn to MyTask.
+  constructor: -> return super
+  _executeSync: sinon.spy (aFile)->aFile
+
 ```
 
 ## API
