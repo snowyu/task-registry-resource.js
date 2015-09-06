@@ -37,8 +37,8 @@ describe 'Resource Task', ->
       result = task.executeSync resource
       expect(result).be.equal resource
       expect(TestResourceTask::_executeSync).be.calledOnce
-    it 'should not pass the non-resource obj', ->
-      should.throw task.executeSync.bind(task, {}), 'should be a resource object.'
+    it 'should not pass the non-resource obj if src', ->
+      should.throw task.executeSync.bind(task, {src:'*.md'}), 'should be a resource object.'
       expect(TestResourceTask::_executeSync).be.not.called
     it 'should filter the resource obj', ->
       resource = FakeResource(relative: '.git', src: '*.md')
@@ -54,8 +54,8 @@ describe 'Resource Task', ->
           expect(result).be.equal resource
           expect(TestResourceTask::_executeSync).be.calledOnce
         done(err)
-    it 'should not pass the non-resource obj', (done)->
-      task.execute {}, (err, result)->
+    it 'should not pass the non-resource obj if src', (done)->
+      task.execute {src:'*.md'}, (err, result)->
         expect(err).to.be.instanceOf TypeError
         expect(result).be.undefined
         expect(TestResourceTask::_executeSync).be.not.called

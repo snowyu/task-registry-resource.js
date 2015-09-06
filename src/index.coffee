@@ -14,10 +14,10 @@ module.exports    = class ResourceTask
       type: ['String', 'Array']
 
   isMatchFile = (aOptions)->
-    unless aOptions and aOptions.relative?
-      throw new TypeError 'The options should be a resource object.'
     result = !aOptions.src
     unless result
+      unless aOptions and aOptions.relative?
+        throw new TypeError 'The options should be a resource object.'
       result = minimatch aOptions.relative, aOptions.src, aOptions
     result
 
